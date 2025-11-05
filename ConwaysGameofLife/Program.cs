@@ -45,6 +45,7 @@
                     Ascii();
                     break;
                 case ConsoleKey.D3:
+                    Character();
                     break;
             }
             
@@ -98,7 +99,46 @@
         }
         static void Character()
         {
-
+            bool IsInCharacterAnim = true;
+            Console.Clear();
+            Console.WriteLine("████████████████████████████████████████████");
+            Console.WriteLine("████████████████████████████████████████████");
+            Console.WriteLine("█████              █████████████████████████");
+            Console.WriteLine("████████        ████████████████████████████");
+            Console.WriteLine("█████████      █████████████████████████████");
+            Console.WriteLine("████████████████████████████████████████████");
+            Console.WriteLine("████████████████████████████████████████████");
+            Console.WriteLine("████████████████████████████████████████████");
+            Console.WriteLine("████████████████████████████████████████████");
+            Console.WriteLine("████████████████████████████████████████████");
+            Console.WriteLine("████████████████████████████████████████████");
+            ConsoleKey pressedKey = ConsoleKey.None;
+            while (IsInCharacterAnim)
+            {
+                if (Console.KeyAvailable)
+                {
+                    if (Console.ReadKey(true).Key == ConsoleKey.W)
+                    {
+                        pressedKey = ConsoleKey.W;
+                        IsInCharacterAnim = false;
+                    }
+                    if (Console.ReadKey(true).Key == ConsoleKey.A)
+                    {
+                        pressedKey = ConsoleKey.A;
+                        IsInCharacterAnim = false;
+                    }
+                    if (Console.ReadKey(true).Key == ConsoleKey.S)
+                    {
+                        pressedKey = ConsoleKey.S;
+                        IsInCharacterAnim = false;
+                    }
+                    if (Console.ReadKey(true).Key == ConsoleKey.D)
+                    {
+                        pressedKey = ConsoleKey.D;
+                        IsInCharacterAnim = false;
+                    }
+                }
+            }
         }
         static void InitializeGrid()
         {
