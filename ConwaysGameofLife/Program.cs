@@ -1,4 +1,6 @@
-﻿namespace ConwaysGameofLife
+﻿using System.Text;
+
+namespace ConwaysGameofLife
 {
     class Program
     {
@@ -8,8 +10,25 @@
         static bool[,] nextGeneration = new bool[GridWidth, GridHeight];
         static Random random = new Random();
 
+        // Ascii variables
+        static CharacterAnimationStates CurrentAnimation = CharacterAnimationStates.Static;
+        static int XLocation = 10;
+        static int YLocation = 2;
+
+        enum CharacterAnimationStates
+        {
+            Movingleft,
+            Static,
+            MovingRight,
+        }
+
         static void Main(string[] args)
         {   //displays menu options
+
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.ForegroundColor = ConsoleColor.White;
+
             bool IsInMenu = true;
             Console.WriteLine("1 - Game of Life");
             Console.WriteLine("2 - Ascii Background");
@@ -75,70 +94,121 @@
 
         static void Ascii()
         {
+            Console.Clear();
 
             background();
 
+            bool GameRunning = true;
 
-
-            static void background()
+            while (GameRunning)
             {
+                Character();
+                Thread.Sleep(100);
 
-                Console.Clear();
-                Console.WriteLine("████████████████████████████████████████████");
-                Console.WriteLine("████████████████████████████████████████████");
-                Console.WriteLine("█████              █████████████████████████");
-                Console.WriteLine("████████        ████████████████████████████");
-                Console.WriteLine("█████████      █████████████████████████████");
-                Console.WriteLine("████████████████████████████████████████████");
-                Console.WriteLine("████████████████████████████████████████████");
-                Console.WriteLine("████████████████████████████████████████████");
-                Console.WriteLine("████████████████████████████████████████████");
-                Console.WriteLine("████████████████████████████████████████████");
-                Console.WriteLine("████████████████████████████████████████████");
+                //if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+                //{
+                //pressedkey = ConsoleKey.Escape;
+                // GameRunning = false;
+                // Console.Clear();
+                //Main();
+                //}
             }
+
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(0, 23);
+        }
+        static void background()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+
+            Console.Clear();
+            Console.WriteLine("████████████████████████████████████████████");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██                                        ██");
+            Console.WriteLine("████████████████████████████████████████████");
         }
         static void Character()
         {
-            bool IsInCharacterAnim = true;
-            Console.Clear();
-            Console.WriteLine("████████████████████████████████████████████");
-            Console.WriteLine("████████████████████████████████████████████");
-            Console.WriteLine("█████              █████████████████████████");
-            Console.WriteLine("████████        ████████████████████████████");
-            Console.WriteLine("█████████      █████████████████████████████");
-            Console.WriteLine("████████████████████████████████████████████");
-            Console.WriteLine("████████████████████████████████████████████");
-            Console.WriteLine("████████████████████████████████████████████");
-            Console.WriteLine("████████████████████████████████████████████");
-            Console.WriteLine("████████████████████████████████████████████");
-            Console.WriteLine("████████████████████████████████████████████");
-            ConsoleKey pressedKey = ConsoleKey.None;
-            while (IsInCharacterAnim)
+            //XLocation
+            //YLocation
+
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            if (CurrentAnimation == CharacterAnimationStates.Movingleft)
             {
-                if (Console.KeyAvailable)
-                {
-                    if (Console.ReadKey(true).Key == ConsoleKey.W)
-                    {
-                        pressedKey = ConsoleKey.W;
-                        IsInCharacterAnim = false;
-                    }
-                    if (Console.ReadKey(true).Key == ConsoleKey.A)
-                    {
-                        pressedKey = ConsoleKey.A;
-                        IsInCharacterAnim = false;
-                    }
-                    if (Console.ReadKey(true).Key == ConsoleKey.S)
-                    {
-                        pressedKey = ConsoleKey.S;
-                        IsInCharacterAnim = false;
-                    }
-                    if (Console.ReadKey(true).Key == ConsoleKey.D)
-                    {
-                        pressedKey = ConsoleKey.D;
-                        IsInCharacterAnim = false;
-                    }
-                }
+                Console.SetCursorPosition(XLocation, YLocation);
+                Console.Write("████████");
+                Console.SetCursorPosition(XLocation, YLocation + 1);
+                Console.Write("███ ███ ██");
+                Console.SetCursorPosition(XLocation, YLocation + 2);
+                Console.Write("█ ██████ █");
+                Console.SetCursorPosition(XLocation, YLocation + 3);
+                Console.Write("█ ██████ █");
+                Console.SetCursorPosition(XLocation, YLocation + 4);
+                Console.Write("████ ████");
+                Console.SetCursorPosition(XLocation, YLocation + 5);
+                Console.Write("████  ████");
+                Console.SetCursorPosition(XLocation, YLocation + 6);
+                Console.Write("████   ████");
             }
+            else if (CurrentAnimation == CharacterAnimationStates.Static)
+            {
+                Console.SetCursorPosition(XLocation, YLocation);
+                Console.Write("████████");
+                Console.SetCursorPosition(XLocation, YLocation + 1);
+                Console.Write("███ ███ ██");
+                Console.SetCursorPosition(XLocation, YLocation + 2);
+                Console.Write("█████  ███");
+                Console.SetCursorPosition(XLocation, YLocation + 3);
+                Console.Write("█████  ███");
+                Console.SetCursorPosition(XLocation, YLocation + 4);
+                Console.Write("█ ██████ █");
+                Console.SetCursorPosition(XLocation, YLocation + 5);
+                Console.Write("█ ██████ █");
+                Console.SetCursorPosition(XLocation, YLocation + 6);
+                Console.Write("████  ████"); 
+                Console.SetCursorPosition(XLocation, YLocation + 7);
+                Console.Write("████  ████"); 
+                Console.SetCursorPosition(XLocation, YLocation + 8);
+                Console.Write("████  ████");
+            }
+            else if (CurrentAnimation == CharacterAnimationStates.MovingRight)
+            {
+                Console.SetCursorPosition(XLocation, YLocation);
+                Console.Write("████████");
+                Console.SetCursorPosition(XLocation, YLocation + 1);
+                Console.Write("███ ███ ██");
+                Console.SetCursorPosition(XLocation, YLocation + 2);
+                Console.Write("████████");
+                Console.SetCursorPosition(XLocation, YLocation + 3);
+                Console.Write("████████");
+                Console.SetCursorPosition(XLocation, YLocation + 4);
+                Console.Write("████████");
+                Console.SetCursorPosition(XLocation, YLocation + 5);
+                Console.Write("████████");
+                Console.SetCursorPosition(XLocation, YLocation + 6);
+                Console.Write("████████");
+            }
+
         }
         static void InitializeGrid()
         {
