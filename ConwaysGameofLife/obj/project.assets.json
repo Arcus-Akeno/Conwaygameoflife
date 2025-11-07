@@ -8,24 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\1388665\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\coldi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\1388665\\Source\\Repos\\Conwaygameoflife\\ConwaysGameofLife\\ConwaysGameofLife.csproj",
+      "projectUniqueName": "C:\\Conwaygameoflife\\ConwaysGameofLife\\ConwaysGameofLife.csproj",
       "projectName": "ConwaysGameofLife",
-      "projectPath": "C:\\Users\\1388665\\Source\\Repos\\Conwaygameoflife\\ConwaysGameofLife\\ConwaysGameofLife.csproj",
-      "packagesPath": "C:\\Users\\1388665\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\1388665\\Source\\Repos\\Conwaygameoflife\\ConwaysGameofLife\\obj\\",
+      "projectPath": "C:\\Conwaygameoflife\\ConwaysGameofLife\\ConwaysGameofLife.csproj",
+      "packagesPath": "C:\\Users\\coldi\\.nuget\\packages\\",
+      "outputPath": "C:\\Conwaygameoflife\\ConwaysGameofLife\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\1388665\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\coldi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -29,7 +29,7 @@ namespace ConwaysGameofLife
         
         static void Main(string[] args)
         {   //displays menu options
-
+            
             Console.OutputEncoding = Encoding.UTF8;
 
             Thread inputthreadread = new Thread(inputthereadloop);
@@ -41,6 +41,7 @@ namespace ConwaysGameofLife
             Console.WriteLine("1 - Game of Life");
             Console.WriteLine("2 - Ascii Background");
             Console.WriteLine("3 - Character animation");
+            Console.WriteLine("4 - Close application");
             ConsoleKey pressedKey = ConsoleKey.None;
             while (IsInMenu)
             {//menu functions
@@ -61,11 +62,11 @@ namespace ConwaysGameofLife
                         pressedKey = ConsoleKey.D3;
                         IsInMenu = false;
                     }
-                    if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+                    if (Console.ReadKey(true).Key == ConsoleKey.D4)
                     {
-                        pressedKey = ConsoleKey.Escape;
-                        IsInMenu = false;
-                        
+                        pressedKey = ConsoleKey.D4;
+                        System.Environment.Exit(0);
+
                     }
                 }
             }
@@ -84,13 +85,18 @@ namespace ConwaysGameofLife
             }
             
         }
-       
+        
         static void gameoflife()
         {
             InitializeGrid();
             Console.CursorVisible = false;
+            ConsoleKey pressedKey = ConsoleKey.None;
+            if (Console.ReadKey(true).Key == ConsoleKey.D4)
+            {
+                pressedKey = ConsoleKey.D4;
+                System.Environment.Exit(0);
 
-
+            }
 
 
             while (true)
@@ -100,7 +106,7 @@ namespace ConwaysGameofLife
                 UpdateGrid();
                 Thread.Sleep(500); // Adjust the delay 
                 Thread.Sleep(200);//to control the speed.
-                Ascii();
+                
             }
 
 
@@ -327,6 +333,10 @@ namespace ConwaysGameofLife
                         else if (lastKey == ConsoleKey.DownArrow || lastKey == ConsoleKey.S)
                         {
                             CurrentAnimation = CharacterAnimationStates.Static;
+                        }
+                        if (YLocation >= 2)
+                        {
+                           YLocation--;
                         }
                         else
                         {
