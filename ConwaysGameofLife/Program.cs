@@ -10,22 +10,30 @@ namespace ConwaysGameofLife
         static bool[,] nextGeneration = new bool[GridWidth, GridHeight];
         static Random random = new Random();
 
+        // Threading
+        public static ConsoleKey lastKey;
+        public static object Keylock = new object();
+
         // Ascii variables
         static CharacterAnimationStates CurrentAnimation = CharacterAnimationStates.Static;
         static int XLocation = 10;
         static int YLocation = 2;
-
+        
+        
         enum CharacterAnimationStates
-        {
+        {//the list of animations we have avalible to use
             Movingleft,
             Static,
             MovingRight,
         }
-
+        
         static void Main(string[] args)
         {   //displays menu options
 
             Console.OutputEncoding = Encoding.UTF8;
+
+            Thread inputthreadread = new Thread(inputthereadloop);
+            inputthreadread.Start();
 
             Console.ForegroundColor = ConsoleColor.White;
 
@@ -53,6 +61,12 @@ namespace ConwaysGameofLife
                         pressedKey = ConsoleKey.D3;
                         IsInMenu = false;
                     }
+                    if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+                    {
+                        pressedKey = ConsoleKey.Escape;
+                        IsInMenu = false;
+                        
+                    }
                 }
             }
             switch(pressedKey)
@@ -66,9 +80,11 @@ namespace ConwaysGameofLife
                 case ConsoleKey.D3:
                     Character();
                     break;
+                
             }
             
         }
+       
         static void gameoflife()
         {
             InitializeGrid();
@@ -125,23 +141,23 @@ namespace ConwaysGameofLife
             Console.Clear();
             Console.WriteLine("████████████████████████████████████████████");
             Console.WriteLine("██                                        ██");
+            Console.WriteLine("██  ███                             ███   ██");
+            Console.WriteLine("██   █                               █    ██");
+            Console.WriteLine("██   █                               █    ██");
+            Console.WriteLine("██   █                               █    ██");
+            Console.WriteLine("██  ███                             ███   ██");
             Console.WriteLine("██                                        ██");
+            Console.WriteLine("██  ███                             ███   ██");
+            Console.WriteLine("██   █                               █    ██");
+            Console.WriteLine("██   █                               █    ██");
+            Console.WriteLine("██   █                               █    ██");
+            Console.WriteLine("██  ███                             ███   ██");
             Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
-            Console.WriteLine("██                                        ██");
+            Console.WriteLine("██  ███                             ███   ██");
+            Console.WriteLine("██   █                               █    ██");
+            Console.WriteLine("██   █                               █    ██");
+            Console.WriteLine("██   █                               █    ██");
+            Console.WriteLine("██  ███                             ███   ██");
             Console.WriteLine("██                                        ██");
             Console.WriteLine("██                                        ██");
             Console.WriteLine("████████████████████████████████████████████");
@@ -152,23 +168,23 @@ namespace ConwaysGameofLife
             //YLocation
 
             Console.ForegroundColor = ConsoleColor.Red;
-
+            //the properties of each animation are set here
             if (CurrentAnimation == CharacterAnimationStates.Movingleft)
             {
                 Console.SetCursorPosition(XLocation, YLocation);
-                Console.Write("████████");
+                Console.Write(" ████████");
                 Console.SetCursorPosition(XLocation, YLocation + 1);
                 Console.Write("███ ███ ██");
                 Console.SetCursorPosition(XLocation, YLocation + 2);
-                Console.Write("█ ██████ █");
+                Console.Write(" ████████");
                 Console.SetCursorPosition(XLocation, YLocation + 3);
-                Console.Write("█ ██████ █");
+                Console.Write(" █ ██████ █");
                 Console.SetCursorPosition(XLocation, YLocation + 4);
-                Console.Write("████ ████");
+                Console.Write("  ████  ████");
                 Console.SetCursorPosition(XLocation, YLocation + 5);
-                Console.Write("████  ████");
+                Console.Write(" ████   ████");
                 Console.SetCursorPosition(XLocation, YLocation + 6);
-                Console.Write("████   ████");
+                Console.Write("████    ████");
             }
             else if (CurrentAnimation == CharacterAnimationStates.Static)
             {
@@ -177,36 +193,33 @@ namespace ConwaysGameofLife
                 Console.SetCursorPosition(XLocation, YLocation + 1);
                 Console.Write("███ ███ ██");
                 Console.SetCursorPosition(XLocation, YLocation + 2);
-                Console.Write("█████  ███");
+                Console.Write(" █████ ███");
                 Console.SetCursorPosition(XLocation, YLocation + 3);
-                Console.Write("█████  ███");
+                Console.Write("█ ██████ █");
                 Console.SetCursorPosition(XLocation, YLocation + 4);
                 Console.Write("█ ██████ █");
                 Console.SetCursorPosition(XLocation, YLocation + 5);
                 Console.Write("█ ██████ █");
                 Console.SetCursorPosition(XLocation, YLocation + 6);
                 Console.Write("████  ████"); 
-                Console.SetCursorPosition(XLocation, YLocation + 7);
-                Console.Write("████  ████"); 
-                Console.SetCursorPosition(XLocation, YLocation + 8);
-                Console.Write("████  ████");
+               
             }
             else if (CurrentAnimation == CharacterAnimationStates.MovingRight)
             {
                 Console.SetCursorPosition(XLocation, YLocation);
-                Console.Write("████████");
+                Console.Write(" ████████");
                 Console.SetCursorPosition(XLocation, YLocation + 1);
                 Console.Write("███ ███ ██");
                 Console.SetCursorPosition(XLocation, YLocation + 2);
-                Console.Write("████████");
+                Console.Write("█████ ███");
                 Console.SetCursorPosition(XLocation, YLocation + 3);
-                Console.Write("████████");
+                Console.Write("█ ██████ █");
                 Console.SetCursorPosition(XLocation, YLocation + 4);
-                Console.Write("████████");
+                Console.Write("█ ██████ █");
                 Console.SetCursorPosition(XLocation, YLocation + 5);
-                Console.Write("████████");
+                Console.Write(" ████   ████");
                 Console.SetCursorPosition(XLocation, YLocation + 6);
-                Console.Write("████████");
+                Console.Write(" ████     ████");
             }
 
         }
@@ -283,6 +296,46 @@ namespace ConwaysGameofLife
             }
 
             return count;
+        }
+        static void inputthereadloop()
+        {//makes animations work on button press and transitions between them when used
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    lock (Keylock)
+                    {
+                        lastKey = Console.ReadKey().Key;
+
+                        if (lastKey == ConsoleKey.LeftArrow || lastKey == ConsoleKey.A)
+                        {
+                            CurrentAnimation = CharacterAnimationStates.Movingleft;
+                            XLocation--;
+                            if (XLocation >= 10)
+                            {
+                                XLocation--;
+                            }
+                        }
+                        else if (lastKey == ConsoleKey.RightArrow || lastKey == ConsoleKey.D)
+                        {
+                            CurrentAnimation = CharacterAnimationStates.MovingRight;
+                            if (XLocation >= 10)
+                            {
+                                XLocation++;
+                            }
+                        }
+                        else if (lastKey == ConsoleKey.DownArrow || lastKey == ConsoleKey.S)
+                        {
+                            CurrentAnimation = CharacterAnimationStates.Static;
+                        }
+                        else
+                        {
+                            CurrentAnimation = CharacterAnimationStates.Static;
+                        }
+
+                    }
+                }
+            }
         }
     }
 }
